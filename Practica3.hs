@@ -1,3 +1,9 @@
+{- listas de muestra -}
+l = [5,9,1,4,10,9,2,8,13,7]
+l' = [5]
+l'' = [4]
+l''' = []
+
 ordenada [] = True
 ordenada [x] = True
 ordenada (x:y:xs) = (x<=y) && ordenada (y:xs)
