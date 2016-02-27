@@ -13,8 +13,12 @@ hanoi n a b c = do (hanoi (n-1) a c b)
 -}
 
 
-hanoi n a b c = zipWith (++) (lista (pred (2^n))) (hanoi'' n a b c)
+hanoi n a b c = display (hanoi' n a b c)
+
+hanoi' n a b c = zipWith (++) (lista (pred (2^n))) (hanoi'' n a b c)
+
 lista n = [(show x)++".-" | x <- [1..n]]
+display x  = mapM_ (\(a) -> putStrLn $ a) x
 
 hanoi'' 0 _ _ _ = []
 hanoi'' n a b c = (hanoi'' (n-1) a c b)++["mueve aro " ++ (show n) ++ " de " ++ (a) ++" a " ++ (c)]++(hanoi'' (n-1) b a c)
