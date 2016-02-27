@@ -1,3 +1,10 @@
+-- funcion comprime 
+comprime [] = []
+comprime xs = aux 1 xs
+    where aux n (x:y:zs) | x == y = aux (n+1) (y:zs) 
+                         | otherwise = (x,n): aux 1 (y:zs)
+          aux n [x] = [(x,n)]
+
 -- torres de hanoi con instrucciones en string
 hanoi 0 a b c = putStr ""
 hanoi n a b c = do (hanoi (n-1) a c b)
