@@ -1,5 +1,6 @@
-permuta [] = [[]]
-permuta (x:xs) = [zs | ys <- permuta xs, zs <- intercala x ys]
+borraElemento e [] = []
+borraElemento e (x:xs) = if (e==x) then xs
+						else x:borraElemento e xs
 
-intercala e [] = [[e]]
-intercala e (x:xs) = (e:x:xs) : [(x:ys) | ys <- (intercala e xs)]
+permuta [] = [[]]
+permuta l = [x:xs | x <- l, xs <- permuta (borraElemento x l)]
