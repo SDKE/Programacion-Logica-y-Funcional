@@ -13,7 +13,7 @@ hanoi n a b c = do (hanoi (n-1) a c b)
 -}
 
 
-hanoi n a b c = zipWith (++) (lista n) (hanoi'' n a b c)
+hanoi n a b c = zipWith (++) (lista (pred (2^n))) (hanoi'' n a b c)
 lista n = [(show x)++".-" | x <- [1..n]]
 
 hanoi'' 0 _ _ _ = []
