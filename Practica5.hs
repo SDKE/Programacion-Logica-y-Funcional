@@ -1,16 +1,21 @@
+grafo n xs = grafo' n xs [0..(n-1)]
+grafo' _ [] _ =[]
+grafo' n ((com,a,b):xs) ds= if(com=="une")then True: (grafo' n xs (une a b ds))
+else (conectados a b ds):grafo' n xs ds 
 
-grafo n l = grafo2 n [] l
+une a b ds=une' (fs a ds) (fs b ds) ds 0
 
-grafo2 0 _ _ = []
-grafo2 n g [] = []
-grafo2 n g ((c,a,b):xs) = if (c=="une") then [True] ++ (grafo2 (pred n) (g++[(a,b)]) xs) else (busca a b g)++(grafo2 n g xs)
+une' a b (x:xs) c= if(c==a) then (b:xs)
+ else x:une' a b (xs) (c+1)
+ 
+conectados a b ds = if((fs a ds)==(fs b ds)) then True
+ else False
 
-
-busca _ _ [] = []
-busca na nb ((a,b):xs)
-                    |((na==a)&&(nb==b)) = [True]
-                    |(na==a)= busca b nb (xs++[(a,b)])
-                    |otherwise = [False]
+fs i ds=if((arreglo ds i 0)==i) then i
+ else fs (arreglo ds i 0) ds
+ 
+arreglo (x:xs) i n=if(i==n) then x
+ else arreglo (xs) i (n+1)
 
 
 
