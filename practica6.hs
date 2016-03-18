@@ -15,6 +15,14 @@ pict t = putStr (pic "" t)
                                  ind ++ show x     ++ "\n" ++
                                         pic ('\t':ind) tl ++ "\n"
 
+// Funcion esHoja
+esHoja _ Nulo = False
+esHoja _ (Nodo r Nulo Nulo) = True
+esHoja n (Nodo r hi hd) 
+     | (n<r) = (esHoja n hi)
+     | (n>r) = (esHoja n hd)
+     | otherwise = False
+
 // Funcion eliminaNodo
 eliminaNodo n Nulo = Nulo 
 eliminaNodo n (Nodo r hi Nulo) | (n==r) = hi 
