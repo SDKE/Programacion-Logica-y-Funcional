@@ -34,7 +34,7 @@ eliminaNodo n (Nodo r hi hd)
               where r' = menor hi 
  
 menor (Nodo r _ Nulo) = r
-menor (Nodo _ _ hd)        = menor hd 
+menor (Nodo _ _ hd) = menor hd 
 
 // Funcion distancia
 distancia _ _ Nulo = error "No hay nodos"
