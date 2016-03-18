@@ -32,3 +32,16 @@ eliminaNodo n (Nodo r hi hd)
  
 menor (Nodo r _ Nulo) = r
 menor (Nodo _ _ hd)        = menor hd 
+
+estaOrdenado Nulo = True
+estaOrdenado (Nodo r hi hd) = mayorTodos r hi && menorTodos r hd && 
+                      estaOrdenado hi && estaOrdenado hd
+
+menorTodos r Nulo = True 
+menorTodos r a        = r < minimum (elementos a)
+ 
+mayorTodos r Nulo = True 
+mayorTodos r a = r > maximum (elementos a)
+
+elementos Nulo = []
+elementos (Nodo r hi hd) = elementos hi ++  r:elementos hd
