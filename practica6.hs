@@ -36,6 +36,43 @@ eliminaNodo n (Nodo r hi hd)
 menor (Nodo r _ Nulo) = r
 menor (Nodo _ _ hd)        = menor hd 
 
+// Funcion distancia
+distancia _ _ Nulo = error "No hay nodos"
+distancia x y (Nodo r hi hd) = distancia' x y 0 (Nodo r hi hd)
+
+distancia' x y z (Nodo r hi hd) = (distancia1 x (Nodo r hi hd)) + (distancia2 y (Nodo r hi hd)) - (2*(distancia3 z (Nodo r hi hd)))
+     where z = ancestro x y (Nodo r hi hd)
+
+distancia1 _ Nulo = error "El nodo no esta"
+distancia1 x (Nodo r hi hd) = distanciaAux1 x (Nodo r hi hd) 0
+
+distanciaAux1 x (Nodo r hi hd) c
+    | (x<r) = distanciaAux1 x hi (c+1)
+    | (x>r) = distanciaAux1 x hd (c+1) 
+    | otherwise = c
+
+distancia2 _ Nulo = error "El nodo no esta"
+distancia2 y (Nodo r hi hd) = distanciaAux2 y (Nodo r hi hd) 0
+
+distanciaAux2 y (Nodo r hi hd) c
+    | (y<r) = distanciaAux2 y hi (c+1)
+    | (y>r) = distanciaAux2 y hd (c+1) 
+    | otherwise = c
+
+distancia3 _ Nulo = error "El nodo no esta"
+distancia3 z (Nodo r hi hd) = distanciaAux3 z (Nodo r hi hd) 0
+
+distanciaAux3 z (Nodo r hi hd) c
+     | (z<r) = distanciaAux3 z hi (c+1)
+     | (z>r) = distanciaAux3 z hd (c+1)
+     | otherwise = c
+
+ancestro _ _ Nulo = error "No hay nodos"
+ancestro x y (Nodo r hi hd) 
+     | (y<r) = ancestro x y hi
+     | (x>r) = ancestro x y hd
+     | otherwise = r
+
 // Funcion estaOrdenado
 estaOrdenado Nulo = True
 estaOrdenado (Nodo r hi hd) = mayorTodos r hi && menorTodos r hd && 
