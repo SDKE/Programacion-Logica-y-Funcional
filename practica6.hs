@@ -15,7 +15,7 @@ pict t = putStr (pic "" t)
                                  ind ++ show x     ++ "\n" ++
                                         pic ('\t':ind) tl ++ "\n"
 
-// Funcion esHoja
+-- Funcion esHoja
 esHoja _ Nulo = False
 esHoja _ (Nodo r Nulo Nulo) = True
 esHoja n (Nodo r hi hd) 
@@ -23,7 +23,7 @@ esHoja n (Nodo r hi hd)
      | (n>r) = (esHoja n hd)
      | otherwise = False
 
-// Funcion eliminaNodo
+-- Funcion eliminaNodo
 eliminaNodo n Nulo = Nulo 
 eliminaNodo n (Nodo r hi Nulo) | (n==r) = hi 
 eliminaNodo n (Nodo r Nulo hd) | (n==r) = hd
@@ -36,7 +36,7 @@ eliminaNodo n (Nodo r hi hd)
 menor (Nodo r _ Nulo) = r
 menor (Nodo _ _ hd) = menor hd 
 
-// Funcion distancia
+-- Funcion distancia
 distancia _ _ Nulo = error "No hay nodos"
 distancia x y (Nodo r hi hd) = distancia' x y 0 (Nodo r hi hd)
 
@@ -73,7 +73,7 @@ ancestro x y (Nodo r hi hd)
      | (x>r) = ancestro x y hd
      | otherwise = r
 
-// Funcion estaOrdenado
+-- Funcion estaOrdenado
 estaOrdenado Nulo = True
 estaOrdenado (Nodo r hi hd) = mayorTodos r hi && menorTodos r hd && 
                       estaOrdenado hi && estaOrdenado hd
