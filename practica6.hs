@@ -86,3 +86,22 @@ mayorTodos r a = r > maximum (elementos a)
 
 elementos Nulo = []
 elementos (Nodo r hi hd) = elementos hi ++  r:elementos hd
+
+-- Funcion distancia entre dos nodos By Fols
+
+distanciaB _ _ Nulo = error "El arbol es nulo"
+distanciaB x y (Nodo raiz izq der) 
+	| (x==y) = error "El 1er numero es igual al 2do"
+	| (x==raiz) = ( distanciaB' y (Nodo raiz izq der) ) - ( distanciaB' x (Nodo raiz izq der) )
+	| (y==raiz) = ( distanciaB' x (Nodo raiz izq der) ) - ( distanciaB' y (Nodo raiz izq der) )
+	| ((x<raiz && y>raiz) || (x>raiz && y<raiz)) = (distanciaB' x (Nodo raiz izq der) ) + (distanciaB' y (Nodo raiz izq der) ) 
+	| (x<raiz && y<raiz) = distanciaB x y izq
+	| (x>raiz && y>raiz) = distanciaB x y der
+	
+distanciaB' _ Nulo = error "Uno de los nodo no esta en el Arbol"
+distanciaB' x (Nodo raiz izq der) = distanciaBAux' x (Nodo raiz izq der) 0
+
+distanciaBAux' x (Nodo raiz izq der) c
+	| (x>raiz) = distanciaBAux' x der (c+1) 
+	| (x<raiz) = distanciaBAux' x izq (c+1)
+	| otherwise = c
