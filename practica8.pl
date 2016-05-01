@@ -2,18 +2,23 @@ eliminaDuplicados([],[]).
 eliminaDuplicados([H|T],S):- member(H,T), !, eliminaDuplicados(T,S).
 eliminaDuplicados([H|T],[H|S]):- eliminaDuplicados(T,S).
 
-%% falta que se genere la lista de 1 a N
 generaLista(0,[]).
-generaLista(N,[N|L]):- N1 is N-1, N2 is N1+1, generaLista(N2,L).
+generaLista(N,[H|L]):- N>0, intervalo(1,N,[H|L]),!.
 
-%% falta que la salida sea una lista de listas
-combinaciones(_,0,[]).
-combinaciones([X|T],N,[X|Comb]):- N>0, N1 is N-1, combinaciones(T,N1,Comb).
-combinaciones([_|T],N,Comb):- N>0, combinaciones(T,N,Comb).  
+intervalo(X,X,[X]).
+intervalo(X,Y,[X|Xs]):-X < Y, Z is X + 1, intervalo(Z,Y,Xs).
 
-%% falta que la salida sea una lista de listas y en el autismo, que salga como en el ejemplo de la practica,
-%% sino sale ordenada de n a n-1
-reinas(N,Sol):- generarTablero(N,Tablero),
+combinaciones(L1,N,L2):-
+    findall(L,combina(L1,N,L),L2).
+	
+combina(_,0,[]).
+combina([X|T],N,[X|Comb]):- N>0, N1 is N-1, combina(T,N1,Comb).
+combina([_|T],N,Comb):- N>0, combina(T,N,Comb).  
+
+reinas(N,L2):-
+    findall(L,reina(N,L),L2).
+
+reina(N,Sol):- generarTablero(N,Tablero),
 permutar(Tablero,Sol),
 buenTablero(Sol).
 
