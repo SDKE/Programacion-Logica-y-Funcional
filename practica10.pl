@@ -58,6 +58,15 @@ ejemploArbol(
      )
 ).
 
+% hijos
+hijos(N,arbol(N,arbol(R, _, _),arbol(R2,_,_)),H):- concatena([R],[R2],H).
+hijos(N,arbol(R,I,_),H):- N<R,hijos(N,I,H).
+hijos(N,arbol(R,_,D),H):- N>R,hijos(N,D,H).
+
+concatena([],L,L).
+concatena(L,[],L).
+concatena([H|T],L,[H|L1]):- concatena(T,L,L1).
+
 % elimina un nodo
 eliminaArbol(N,arbol(N,I,nulo),I).
 eliminaArbol(N,arbol(N,nulo,D),D).
